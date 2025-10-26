@@ -1,3 +1,4 @@
+import assets.Asset;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,18 +9,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
+import java.util.List;
 
 public class UserInterface {
 
-    int testValue = 0;
+    JsonReader jsonReader = new JsonReader();
 
     public void displayUI(Stage stage) {
         VBox layout = new VBox(10, getTopButtonsBox(), getTable(), getSummaryLabelsBox());
         layout.setStyle("-fx-padding: 20;");
 
-        Scene scene = new Scene(layout, 600, 400);
+        Scene scene = new Scene(layout, 900, 600);
         stage.setTitle("AssetsTracker");
         stage.setScene(scene);
         stage.show();
@@ -46,7 +46,7 @@ public class UserInterface {
 
     private TableView<String[]> getTable() {
         TableView<String[]> table = new TableView<>();
-        table.setPrefHeight(200);
+        table.setPrefHeight(300);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         for (int i = 1; i <= Columns.values().length; i++) {
@@ -58,11 +58,20 @@ public class UserInterface {
             table.getColumns().add(col);
         }
 
-        for (int i = 0; i < 4; i++) {
-            String[] row = new String[6];
-            Arrays.fill(row, i == 2 ? "a" : "b");
+        List<Asset> dataFromJson = jsonReader.loadAssetsFromJson();
+
+        for (Asset asset : dataFromJson) {
+            String[] row = new String[Columns.values().length];
+            row[0] = asset.getCategory();
+            row[1] = asset.getName();
+            row[2] = asset.getCode();
+            row[3] = String.valueOf(asset.getLatestValue());
+            row[4] = String.valueOf(asset.getActualValue());
+            row[5] = "change +/- x%";
             table.getItems().add(row);
         }
+        table.setPlaceholder(new Label("No data to display"));
+        table.setFixedCellSize(40);
 
         return table;
     }

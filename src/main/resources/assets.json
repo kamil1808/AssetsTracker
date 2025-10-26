@@ -1,0 +1,114 @@
+[
+  {
+    "category": "Crypto",
+    "name": "Bitcoin",
+    "code": "BTC",
+    "latestValue": 0.0,
+    "actualValue": 12345.67
+  },
+  {
+    "category": "Crypto",
+    "name": "Ethereum",
+    "code": "ETH",
+    "latestValue": 0.0,
+    "actualValue": 5432.10
+  },
+  {
+    "category": "Crypto",
+    "name": "Polkadot",
+    "code": "DOT",
+    "latestValue": 0.0,
+    "actualValue": 2500.00
+  },
+  {
+    "category": "Fiat",
+    "name": "Dollar",
+    "code": "USD",
+    "latestValue": 0.0,
+    "actualValue": 111.00
+  },
+  {
+    "category": "Crypto",
+    "name": "Bitcoin",
+    "code": "BTC",
+    "latestValue": 0.0,
+    "actualValue": 12345.67
+  },
+  {
+    "category": "Crypto",
+    "name": "Ethereum",
+    "code": "ETH",
+    "latestValue": 0.0,
+    "actualValue": 5432.10
+  },
+  {
+    "category": "Crypto",
+    "name": "Polkadot",
+    "code": "DOT",
+    "latestValue": 0.0,
+    "actualValue": 2500.00
+  },
+  {
+    "category": "Fiat",
+    "name": "Dollar",
+    "code": "USD",
+    "latestValue": 0.0,
+    "actualValue": 111.00
+  },
+  {
+    "category": "Crypto",
+    "name": "Bitcoin",
+    "code": "BTC",
+    "latestValue": 0.0,
+    "actualValue": 12345.67
+  },
+  {
+    "category": "Crypto",
+    "name": "Ethereum",
+    "code": "ETH",
+    "latestValue": 0.0,
+    "actualValue": 5432.10
+  },
+  {
+    "category": "Crypto",
+    "name": "Polkadot",
+    "code": "DOT",
+    "latestValue": 0.0,
+    "actualValue": 2500.00
+  },
+  {
+    "category": "Fiat",
+    "name": "Dollar",
+    "code": "USD",
+    "latestValue": 0.0,
+    "actualValue": 111.00
+  },
+  {
+    "category": "Crypto",
+    "name": "Bitcoin",
+    "code": "BTC",
+    "latestValue": 0.0,
+    "actualValue": 12345.67
+  },
+  {
+    "category": "Crypto",
+    "name": "Ethereum",
+    "code": "ETH",
+    "latestValue": 0.0,
+    "actualValue": 5432.10
+  },
+  {
+    "category": "Crypto",
+    "name": "Polkadot",
+    "code": "DOT",
+    "latestValue": 0.0,
+    "actualValue": 2500.00
+  },
+  {
+    "category": "Fiat",
+    "name": "Dollar",
+    "code": "USD",
+    "latestValue": 0.0,
+    "actualValue": 111.00
+  }
+]
