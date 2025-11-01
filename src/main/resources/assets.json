@@ -3,112 +3,18 @@
     "category": "Crypto",
     "name": "Bitcoin",
     "code": "BTC",
-    "latestValue": 0.0,
+    "amount": 3.0,
+    "unit": "tokens",
+    "latestValue": 1234.0,
     "actualValue": 12345.67
   },
   {
     "category": "Crypto",
     "name": "Ethereum",
     "code": "ETH",
-    "latestValue": 0.0,
+    "amount": 2.234,
+    "unit": "tokens",
+    "latestValue": 34.0,
     "actualValue": 5432.10
-  },
-  {
-    "category": "Crypto",
-    "name": "Polkadot",
-    "code": "DOT",
-    "latestValue": 0.0,
-    "actualValue": 2500.00
-  },
-  {
-    "category": "Fiat",
-    "name": "Dollar",
-    "code": "USD",
-    "latestValue": 0.0,
-    "actualValue": 111.00
-  },
-  {
-    "category": "Crypto",
-    "name": "Bitcoin",
-    "code": "BTC",
-    "latestValue": 0.0,
-    "actualValue": 12345.67
-  },
-  {
-    "category": "Crypto",
-    "name": "Ethereum",
-    "code": "ETH",
-    "latestValue": 0.0,
-    "actualValue": 5432.10
-  },
-  {
-    "category": "Crypto",
-    "name": "Polkadot",
-    "code": "DOT",
-    "latestValue": 0.0,
-    "actualValue": 2500.00
-  },
-  {
-    "category": "Fiat",
-    "name": "Dollar",
-    "code": "USD",
-    "latestValue": 0.0,
-    "actualValue": 111.00
-  },
-  {
-    "category": "Crypto",
-    "name": "Bitcoin",
-    "code": "BTC",
-    "latestValue": 0.0,
-    "actualValue": 12345.67
-  },
-  {
-    "category": "Crypto",
-    "name": "Ethereum",
-    "code": "ETH",
-    "latestValue": 0.0,
-    "actualValue": 5432.10
-  },
-  {
-    "category": "Crypto",
-    "name": "Polkadot",
-    "code": "DOT",
-    "latestValue": 0.0,
-    "actualValue": 2500.00
-  },
-  {
-    "category": "Fiat",
-    "name": "Dollar",
-    "code": "USD",
-    "latestValue": 0.0,
-    "actualValue": 111.00
-  },
-  {
-    "category": "Crypto",
-    "name": "Bitcoin",
-    "code": "BTC",
-    "latestValue": 0.0,
-    "actualValue": 12345.67
-  },
-  {
-    "category": "Crypto",
-    "name": "Ethereum",
-    "code": "ETH",
-    "latestValue": 0.0,
-    "actualValue": 5432.10
-  },
-  {
-    "category": "Crypto",
-    "name": "Polkadot",
-    "code": "DOT",
-    "latestValue": 0.0,
-    "actualValue": 2500.00
-  },
-  {
-    "category": "Fiat",
-    "name": "Dollar",
-    "code": "USD",
-    "latestValue": 0.0,
-    "actualValue": 111.00
   }
 ]

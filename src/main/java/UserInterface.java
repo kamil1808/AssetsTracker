@@ -9,11 +9,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInterface {
 
     JsonReader jsonReader = new JsonReader();
+    JsonWriter jsonWriter = new JsonWriter();
+    ActualValueProvider actualValueProvider = new ActualValueProvider();
+    private TableView<String[]> table;
 
     public void displayUI(Stage stage) {
         VBox layout = new VBox(10, getTopButtonsBox(), getTable(), getSummaryLabelsBox());
@@ -35,8 +40,8 @@ public class UserInterface {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(click -> System.out.println("save"));
 
-        Button loadButton = new Button("Load");
-        loadButton.setOnAction(click -> System.out.println("load"));
+        Button loadButton = new Button("Refresh");
+        loadButton.setOnAction(click -> refreshValues());
 
         HBox buttonBox = new HBox(10, addButton, deleteButton, saveButton, loadButton);
         buttonBox.setAlignment(Pos.CENTER);
@@ -44,8 +49,13 @@ public class UserInterface {
         return buttonBox;
     }
 
+    private void refreshValues() {
+        System.out.println("Refresh button clicked");
+        loadTableData();
+    }
+
     private TableView<String[]> getTable() {
-        TableView<String[]> table = new TableView<>();
+        table = new TableView<>();
         table.setPrefHeight(300);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -58,7 +68,18 @@ public class UserInterface {
             table.getColumns().add(col);
         }
 
+        loadTableData();
+
+        table.setPlaceholder(new Label("No data to display"));
+        table.setFixedCellSize(40);
+
+        return table;
+    }
+
+    private void loadTableData() {
+        table.getItems().clear();
         List<Asset> dataFromJson = jsonReader.loadAssetsFromJson();
+        ArrayList<Asset> newData = new ArrayList<>();
 
         for (Asset asset : dataFromJson) {
             String[] row = new String[Columns.values().length];
@@ -66,14 +87,16 @@ public class UserInterface {
             row[1] = asset.getName();
             row[2] = asset.getCode();
             row[3] = String.valueOf(asset.getLatestValue());
-            row[4] = String.valueOf(asset.getActualValue());
-            row[5] = "change +/- x%";
+            double actualValue = actualValueProvider.getActualAssetValue(asset);
+            row[4] = String.valueOf(actualValue);
+            asset.setLatestValue(actualValue);
+            newData.add(asset);
+            double change = asset.getActualValue() - asset.getLatestValue();
+            row[5] = (change > 0 ? "+" : "") + change;
             table.getItems().add(row);
         }
-        table.setPlaceholder(new Label("No data to display"));
-        table.setFixedCellSize(40);
 
-        return table;
+        jsonWriter.saveAssetsToJson(newData);
     }
 
     private HBox getSummaryLabelsBox() {
