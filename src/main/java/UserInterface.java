@@ -17,7 +17,7 @@ public class UserInterface {
 
     JsonReader jsonReader = new JsonReader();
     JsonWriter jsonWriter = new JsonWriter();
-    ActualValueProvider actualValueProvider = new ActualValueProvider();
+    PriceProvider priceProvider = new PriceProvider();
     private TableView<String[]> table;
 
     public void displayUI(Stage stage) {
@@ -86,14 +86,21 @@ public class UserInterface {
             row[0] = asset.getCategory();
             row[1] = asset.getName();
             row[2] = asset.getCode();
-            row[3] = String.valueOf(asset.getLatestValue());
-            double actualValue = actualValueProvider.getActualAssetValue(asset);
-            row[4] = String.valueOf(actualValue);
-            asset.setLatestValue(actualValue);
-            newData.add(asset);
-            double change = asset.getActualValue() - asset.getLatestValue();
-            row[5] = (change > 0 ? "+" : "") + change;
+            row[3] = String.valueOf(asset.getAmount());
+            row[4] = asset.getUnit();
+
+            double actualPrice = priceProvider.getActualAssetPrice(asset);
+            row[5] = String.format("%.3f", actualPrice);
+
+            double actualValue = actualPrice * asset.getAmount();
+            row[6] = String.format("%.3f", actualValue);
+            row[7] = String.format("%.3f", asset.getLatestValue());
+            double change = actualValue - asset.getLatestValue();
+            row[8] = (change > 0 ? "+" : "") + String.format("%.3f", change);
             table.getItems().add(row);
+
+            asset.setLatestValue(actualPrice * asset.getAmount());
+            newData.add(asset);
         }
 
         jsonWriter.saveAssetsToJson(newData);

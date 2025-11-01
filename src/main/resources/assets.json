@@ -3,7 +3,7 @@
     "category": "Crypto",
     "name": "Bitcoin",
     "code": "BTC",
-    "amount": 3.0,
+    "amount": 0.102,
     "unit": "tokens",
     "latestValue": 1234.0,
     "actualValue": 12345.67
@@ -12,7 +12,7 @@
     "category": "Crypto",
     "name": "Ethereum",
     "code": "ETH",
-    "amount": 2.234,
+    "amount": 0.7,
     "unit": "tokens",
     "latestValue": 34.0,
     "actualValue": 5432.10
