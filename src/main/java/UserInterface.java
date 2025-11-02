@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class UserInterface {
     JsonWriter jsonWriter = new JsonWriter();
     PriceProvider priceProvider = new PriceProvider();
     private TableView<String[]> table;
+    private Label summaryValueLabel;
 
     public void displayUI(Stage stage) {
         VBox layout = new VBox(10, getTopButtonsBox(), getTable(), getSummaryLabelsBox());
@@ -32,16 +32,16 @@ public class UserInterface {
 
     private HBox getTopButtonsBox() {
         Button addButton = new Button("Add");
-        addButton.setOnAction(click -> System.out.println("add"));
+        addButton.setOnAction(click -> addButtonAction());
 
         Button deleteButton = new Button("Delete");
-        deleteButton.setOnAction(click -> System.out.println("delete"));
+        deleteButton.setOnAction(click -> deleteButtonAction());
 
         Button saveButton = new Button("Save");
-        saveButton.setOnAction(click -> System.out.println("save"));
+        saveButton.setOnAction(click -> saveButtonAction());
 
         Button loadButton = new Button("Refresh");
-        loadButton.setOnAction(click -> refreshValues());
+        loadButton.setOnAction(click -> refreshButtonAction());
 
         HBox buttonBox = new HBox(10, addButton, deleteButton, saveButton, loadButton);
         buttonBox.setAlignment(Pos.CENTER);
@@ -49,9 +49,22 @@ public class UserInterface {
         return buttonBox;
     }
 
-    private void refreshValues() {
+    private void addButtonAction() {
+        System.out.println("Add button clicked");
+    }
+
+    private void deleteButtonAction() {
+        System.out.println("Delete button clicked");
+    }
+
+    private void saveButtonAction() {
+        System.out.println("Save button clicked");
+    }
+
+    private void refreshButtonAction() {
         System.out.println("Refresh button clicked");
         loadTableData();
+        updateSummaryValueLabel();
     }
 
     private TableView<String[]> getTable() {
@@ -63,16 +76,12 @@ public class UserInterface {
             final int colIndex = i;
             TableColumn<String[], String> col = new TableColumn<>(Columns.getNameById(i));
             col.setCellValueFactory(data ->
-                    new SimpleStringProperty(data.getValue()[colIndex - 1])
-            );
+                    new SimpleStringProperty(data.getValue()[colIndex - 1]));
             table.getColumns().add(col);
         }
-
         loadTableData();
-
         table.setPlaceholder(new Label("No data to display"));
         table.setFixedCellSize(40);
-
         return table;
     }
 
@@ -102,18 +111,31 @@ public class UserInterface {
             asset.setLatestValue(actualPrice * asset.getAmount());
             newData.add(asset);
         }
-
         jsonWriter.saveAssetsToJson(newData);
     }
 
     private HBox getSummaryLabelsBox() {
-        Label label1 = new Label("Summary value: ");
-        Label label2 = new Label("Info 1:");
-        Label label3 = new Label("Info 2:");
+        summaryValueLabel = new Label();
+        updateSummaryValueLabel();
 
-        HBox summaryBox = new HBox(20, label1, label2, label3);
+        HBox summaryBox = new HBox(20, summaryValueLabel);
         summaryBox.setStyle("-fx-alignment: center; -fx-padding: 10; -fx-font-size: 16px;");
         return summaryBox;
+    }
+
+    private void updateSummaryValueLabel() {
+        double summary = calculateSummaryValue();
+        summaryValueLabel.setText("Summary value: " + String.format("%.3f", summary));
+    }
+
+    private double calculateSummaryValue() {
+        double summaryValue = 0.0;
+        for (String[] row : table.getItems()) {
+            try {
+                summaryValue += Double.parseDouble(row[6].replace(",", "."));
+            } catch (NumberFormatException ignored) {}
+        }
+        return summaryValue;
     }
 }
 
